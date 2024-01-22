@@ -56,14 +56,16 @@ AFRAME.registerComponent("switch", {
 
  <a-image id="arrow1" class="clickable"
      src="#arrow" width="2" height="2" opacity="1"
-     position="7 0 0" rotation="90 0 90"
-     animation__flash="property: opacity; to: 0.25; dur: 600; dir: alternate; loop: true"
+     position="7 0 0" rotation="90 0 90" scale="1"
+     animation__flash="property: opacity; to: 0.5; dur: 600; dir: alternate; loop: true"
+     animation__click="startEvents: click; property: scale; to: 0; dir: reverse; dur: 300"
      switch></a-image>
 
  <a-image id="arrow2" class="clickable"
      src="#arrow" width="2" height="2" opacity="1"
-     position="-7 0 0" rotation="90 0 -90"
-     animation__flash="property: opacity; to: 0.25; dur: 600; dir: alternate; loop: true"
+     position="-7 0 0" rotation="90 0 -90" scale="1"
+     animation__flash="property: opacity; to: 0.5; dur: 600; dir: alternate; loop: true"
+     animation__click="startEvents: click; property: scale; to: 0; dir: reverse; dur: 300"
      switch></a-image>
 
 </a-scene>
