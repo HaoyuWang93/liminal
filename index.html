@@ -92,7 +92,7 @@ AFRAME.registerComponent("flip", {
   animation__clickback="startEvents: animationcomplete__click; property: position; to: -5 0 0; dur: 300"
   switch></a-image>
 
-  <a-image id="bridge" class="clickable"
+<a-image id="bridge" class="clickable"
   src="#arrow" width="2" height="2" opacity="1"
   position="0 0 -5" rotation="90 0 0" scale="0"
   animation__on="startEvents: showbridge; property: scale; to: 1; dur: 10"
@@ -105,6 +105,14 @@ AFRAME.registerComponent("flip", {
   animation__fliprotate="startEvents: bridgeflip; property: rotation; to: -90 0 0; dur: 10"
   animation__fliprotateback="startEvents: bridgeback; property: rotation; to: 90 0 0; dur: 10"
   flip></a-image>
+
+  <a-text line-height="100"
+  width="3" rotation="-90 0 0" position="0 0 0" color="white" align="center"
+  value="Modernist memory 
+  or 
+  dreamed limbo?
+  Work in progress...">
+</a-text>
 
 </a-scene>
 
