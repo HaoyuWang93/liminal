@@ -26,6 +26,16 @@ AFRAME.registerComponent("switch", {
   }
 })
 
+AFRAME.registerComponent('fade', {
+    schema: {default:''},
+    init: function () {
+      var sky = document.querySelector('#sky1');
+      this.el.addEventListener('click', function(e) {
+        sky.emit('fadein');
+      });
+    }
+  });
+
   </script>
 
 <a-assets>
@@ -50,23 +60,26 @@ AFRAME.registerComponent("switch", {
 
 <a-camera wasd-controls-enabled="false"></a-camera>
 
-<a-sky
-  id="sky1" src="#scene1" rotation="0 -90 0"></a-sky>
+<a-sky id="sky1" src="#scene1" rotation="0 -90 0" opacity="1"
+  animation__fadein="startEvents: fadein; property: material.opacity; from: 0; to: 1; dir: alternate; dur: 300"></a-sky>
 
+  <a-image id="arrow1" class="clickable"
+  src="#arrow" width="2" height="2" opacity="1"
+  position="5 0 0" rotation="90 0 90"
+  animation__flash="property: opacity; to: 0.5; dur: 600; dir: alternate; loop: true"
+  animation__click="startEvents: click; property: position; to: 8 0 0; dur: 300"
+  animation__clickback="startEvents: animationcomplete__click; property: position; to: 5 0 0; dur: 300"
+  switch
+  fade></a-image>
 
- <a-image id="arrow1" class="clickable"
-     src="#arrow" width="2" height="2" opacity="1"
-     position="7 0 0" rotation="90 0 90" scale="1"
-     animation__flash="property: opacity; to: 0.5; dur: 600; dir: alternate; loop: true"
-     animation__click="startEvents: click; property: scale; to: 0; dir: reverse; dur: 300"
-     switch></a-image>
-
- <a-image id="arrow2" class="clickable"
-     src="#arrow" width="2" height="2" opacity="1"
-     position="-7 0 0" rotation="90 0 -90" scale="1"
-     animation__flash="property: opacity; to: 0.5; dur: 600; dir: alternate; loop: true"
-     animation__click="startEvents: click; property: scale; to: 0; dir: reverse; dur: 300"
-     switch></a-image>
+<a-image id="arrow2" class="clickable"
+  src="#arrow" width="2" height="2" opacity="1"
+  position="-5 0 0" rotation="90 0 -90" scale="1"
+  animation__flash="property: opacity; to: 0.5; dur: 600; dir: alternate; loop: true"
+  animation__click="startEvents: click; property: position; to: -8 0 0; dur: 300"
+  animation__clickback="startEvents: animationcomplete__click; property: position; to: -5 0 0; dur: 300"
+  switch
+  fade></a-image>
 
 </a-scene>
 
