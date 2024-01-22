@@ -1,0 +1,72 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>LIMBO - SCHOOL</title>
+  <script src="aframe/aframe.min.js"></script>
+</head>
+
+<body>
+
+  <script>
+
+AFRAME.registerComponent("switch", {
+  init:function() {
+     let scene2 = false;
+     let sky1 = document.querySelector("#sky1");
+     this.el.addEventListener("click", () => {
+          if(!scene2) {
+              sky1.setAttribute("src", "#scene2");
+           } else {
+              sky1.setAttribute("src", "#scene1");
+           }
+           scene2 = !scene2;
+     });
+  }
+})
+
+  </script>
+
+<a-assets>
+  <img id="scene1" src="images/1.jpg">
+  <img id="scene2" src="images/2.jpg">
+  <img id="arrow" src="images/arrow.png">
+</a-assets>
+
+  <style>
+  div.a-enter-ar {
+    visibility: hidden;
+  }
+
+  div.a-enter-vr {
+    visibility: hidden;
+  }
+  </style>
+
+
+<a-scene raycaster="objects: .clickable" cursor="rayOrigin: mouse; fuse: false;"
+    loading-screen="dotsColor: white; backgroundColor: black">
+
+<a-camera wasd-controls-enabled="false"></a-camera>
+
+<a-sky
+  id="sky1" src="#scene1" rotation="0 -90 0"></a-sky>
+
+
+ <a-image id="arrow1" class="clickable"
+     src="#arrow" width="2" height="2" opacity="1"
+     position="7 0 0" rotation="90 0 90"
+     animation__flash="property: opacity; to: 0.25; dur: 600; dir: alternate; loop: true"
+     switch></a-image>
+
+ <a-image id="arrow2" class="clickable"
+     src="#arrow" width="2" height="2" opacity="1"
+     position="-7 0 0" rotation="90 0 -90"
+     animation__flash="property: opacity; to: 0.25; dur: 600; dir: alternate; loop: true"
+     switch></a-image>
+
+</a-scene>
+
+</body>
+</html>
