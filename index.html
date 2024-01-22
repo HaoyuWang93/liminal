@@ -15,26 +15,39 @@ AFRAME.registerComponent("switch", {
   init:function() {
      let scene2 = false;
      let sky1 = document.querySelector("#sky1");
+     let bridge = document.querySelector("#bridge");
      this.el.addEventListener("click", () => {
           if(!scene2) {
               sky1.setAttribute("src", "#scene2");
+              bridge.emit('showbridge')
            } else {
               sky1.setAttribute("src", "#scene1");
+              bridge.emit('hidebridge')
            }
            scene2 = !scene2;
+        sky1.emit('fadein');
      });
   }
 })
 
-AFRAME.registerComponent('fade', {
-    schema: {default:''},
-    init: function () {
-      var sky = document.querySelector('#sky1');
-      this.el.addEventListener('click', function(e) {
-        sky.emit('fadein');
-      });
-    }
-  });
+AFRAME.registerComponent("flip", {
+  init:function() {
+     let rotate = false;
+     let sky1 = document.querySelector("#sky1");
+     let bridge = document.querySelector("#bridge");
+     this.el.addEventListener("click", () => {
+          if(!rotate) {
+              sky1.setAttribute("rotation", "0 90 0");
+              bridge.emit('bridgeflip')
+           } else {
+              sky1.setAttribute("rotation", "0 -90 0");
+              bridge.emit('bridgeback')
+           }
+           rotate = !rotate;
+        sky1.emit('fadein');
+     });
+  }
+})
 
   </script>
 
@@ -69,8 +82,7 @@ AFRAME.registerComponent('fade', {
   animation__flash="property: opacity; to: 0.5; dur: 600; dir: alternate; loop: true"
   animation__click="startEvents: click; property: position; to: 8 0 0; dur: 300"
   animation__clickback="startEvents: animationcomplete__click; property: position; to: 5 0 0; dur: 300"
-  switch
-  fade></a-image>
+  switch></a-image>
 
 <a-image id="arrow2" class="clickable"
   src="#arrow" width="2" height="2" opacity="1"
@@ -78,8 +90,21 @@ AFRAME.registerComponent('fade', {
   animation__flash="property: opacity; to: 0.5; dur: 600; dir: alternate; loop: true"
   animation__click="startEvents: click; property: position; to: -8 0 0; dur: 300"
   animation__clickback="startEvents: animationcomplete__click; property: position; to: -5 0 0; dur: 300"
-  switch
-  fade></a-image>
+  switch></a-image>
+
+  <a-image id="bridge" class="clickable"
+  src="#arrow" width="2" height="2" opacity="1"
+  position="0 0 -5" rotation="90 0 0" scale="0"
+  animation__on="startEvents: showbridge; property: scale; to: 1; dur: 10"
+  animation__off="startEvents: hidebridge; property: scale; to: 0; dur: 10"
+  animation__flash="property: opacity; to: 0.5; dur: 600; dir: alternate; loop: true"
+  animation__click="startEvents: click; property: scale; to: 1.5; dur: 300"
+  animation__clickback="startEvents: animationcomplete__click; property: scale; to: 1; dur: 300"
+  animation__flip="startEvents: bridgeflip; property: position; to: 0 0 5; dur: 10"
+  animation__flipback="startEvents: bridgeback; property: position; to: 0 0 -5; dur: 10"
+  animation__fliprotate="startEvents: bridgeflip; property: rotation; to: -90 0 0; dur: 10"
+  animation__fliprotateback="startEvents: bridgeback; property: rotation; to: 90 0 0; dur: 10"
+  flip></a-image>
 
 </a-scene>
 
