@@ -55,13 +55,19 @@ AFRAME.registerComponent("flip", {
      let rotate = false;
      let sky1 = document.querySelector("#sky1");
      let bridge = document.querySelector("#bridge");
+     let cone = document.querySelector("#cone");
+     let coneback = document.querySelector("#coneback");
      this.el.addEventListener("click", () => {
           if(!rotate) {
               sky1.setAttribute("rotation", "0 90 0");
               bridge.emit('bridgeflip');
+              cone.emit('bridgeflip');
+              coneback.emit('bridgeflip');
            } else {
               sky1.setAttribute("rotation", "0 -90 0");
               bridge.emit('bridgeback');
+              cone.emit('bridgeback');
+              coneback.emit('bridgeback');
            }
            rotate = !rotate;
         sky1.emit('fadein');
@@ -98,31 +104,40 @@ AFRAME.registerComponent("flip", {
 <a-sky id="sky1" src="#scene1" rotation="0 -90 0" opacity="1"
   animation__fadein="startEvents: fadein; property: material.opacity; from: 0; to: 1; dir: alternate; dur: 300"></a-sky>
 
-  <a-cone id="coneback" class="clickable"
-  color="red" radius-bottom="0" radius-top="1.5" height="3" opacity="0.5"
-  position="20 1 0"
-  animation__flash="property: opacity; to: 0; dur: 1000; dir: alternate; loop: true"
-  animation__click="startEvents: click; property: position; to: 20 5 0; dur: 150"
-  animation__clickback="startEvents: animationcomplete__click; property: position; to: 20 1 0; dur: 150"
-  switchback></a-cone>
+  <a-image src="#arrow" id="coneback" class="clickable"
+  width="2" height="2" rotation="90 0 90" position="5 0 0" opacity="1" scale="1"
+  animation__flash="property: opacity; to: 0.25; dur: 1000; dir: alternate; loop: true"
+  animation__click="startEvents: click; property: scale; to: 0; dur: 150"
+  animation__clickback="startEvents: animationcomplete__click; property: scale; to: 1; dur: 150"
+  animation__flip="startEvents: bridgeflip; property: position; to: -5 0 0; dur: 10"
+  animation__flipback="startEvents: bridgeback; property: position; to: 5 0 0; dur: 10"
+  animation__fliprotate="startEvents: bridgeflip; property: rotation; to: 90 0 -90; dur: 10"
+  animation__fliprotateback="startEvents: bridgeback; property: rotation; to: 90 0 90; dur: 10"
+  switchback></a-image>
 
-  <a-cone id="cone" class="clickable"
-  color="red" radius-bottom="0" radius-top="1.5" height="3" opacity="0.5"
-  position="-20 1 0"
-  animation__flash="property: opacity; to: 0; dur: 1000; dir: alternate; loop: true"
-  animation__click="startEvents: click; property: position; to: -20 5 0; dur: 150"
-  animation__clickback="startEvents: animationcomplete__click; property: position; to: -20 1 0; dur: 150"
-  switch></a-cone>
+  <a-image src="#arrow" id="cone" class="clickable"
+  width="2" height="2" rotation="90 0 -90" position="-5 0 0" opacity="1" scale="1"
+  animation__flash="property: opacity; to: 0.25; dur: 1000; dir: alternate; loop: true"
+  animation__click="startEvents: click; property: scale; to: 0; dur: 150"
+  animation__clickback="startEvents: animationcomplete__click; property: scale; to: 1; dur: 150"
+  animation__flip="startEvents: bridgeflip; property: position; to: 5 0 0; dur: 10"
+  animation__flipback="startEvents: bridgeback; property: position; to: -5 0 0; dur: 10"
+  animation__fliprotate="startEvents: bridgeflip; property: rotation; to: 90 0 90; dur: 10"
+  animation__fliprotateback="startEvents: bridgeback; property: rotation; to: 90 0 -90; dur: 10"
+  switch></a-image>
 
-<a-cone id="bridge" class="clickable"
-  color="red" radius-bottom="0" radius-top="3" height="6" opacity="0.5"
-  position="0 1 -50" scale="0"
+<a-image src="#arrow" id="bridge" class="clickable"
+  width="2" height="2" opacity="1" position="0 0 -5" rotation="90 0 0" scale="0"
   animation__on="startEvents: showbridge; property: scale; to: 1; dur: 10"
   animation__off="startEvents: hidebridge; property: scale; to: 0; dur: 10"
-  animation__flash="property: opacity; to: 0; dur: 1000; dir: alternate; loop: true"
-  animation__flip="startEvents: bridgeflip; property: position; to: 0 1 50; dur: 10"
-  animation__flipback="startEvents: bridgeback; property: position; to: 0 1 -50; dur: 10"
-  flip></a-cone>
+  animation__flash="property: opacity; to: 0.25; dur: 600; dir: alternate; loop: true"
+  animation__click="startEvents: click; property: opacity; to: 0; dur: 150"
+  animation__clickback="startEvents: animationcomplete__click; property: opacity; to: 1; dur: 150"
+  animation__flip="startEvents: bridgeflip; property: position; to: 0 0 5; dur: 10"
+  animation__flipback="startEvents: bridgeback; property: position; to: 0 0 -5; dur: 10"
+  animation__fliprotate="startEvents: bridgeflip; property: rotation; to: -90 0 0; dur: 10"
+  animation__fliprotateback="startEvents: bridgeback; property: rotation; to: 90 0 0; dur: 10"
+  flip></a-image>
 
   <a-text line-height="100"
   width="3" rotation="-90 0 0" position="0 0 0" color="white" align="center"
