@@ -11,24 +11,44 @@
 
   <script>
 
-AFRAME.registerComponent("switch", {
-  init:function() {
-     let scene2 = false;
-     let sky1 = document.querySelector("#sky1");
-     let bridge = document.querySelector("#bridge");
-     this.el.addEventListener("click", () => {
-          if(!scene2) {
-              sky1.setAttribute("src", "#scene2");
-              bridge.emit('showbridge')
-           } else {
-              sky1.setAttribute("src", "#scene1");
-              bridge.emit('hidebridge')
-           }
-           scene2 = !scene2;
-        sky1.emit('fadein');
-     });
-  }
-})
+  AFRAME.registerComponent('switch', {
+                init: function () {
+                      const sky1 = document.querySelector('#sky1');
+                      const images = ['#scene1', '#scene11', '#scene2','#scene21'];
+                      let currentImageIndex = 0;
+                      let bridge = document.querySelector("#bridge");
+                      this.el.addEventListener('click', () => {
+                          currentImageIndex = (currentImageIndex + 1) % images.length;
+                          sky1.setAttribute('src', images[currentImageIndex]);
+                          if(currentImageIndex === 2) {
+                              bridge.emit('showbridge')
+                           } else {
+                              bridge.emit('hidebridge')
+                           };
+                          sky1.emit('fadein');
+                      });
+                  }
+              });
+
+AFRAME.registerComponent('switchback', {
+              init: function () {
+                    const sky1 = document.querySelector('#sky1');
+                    const images = ['#scene1', '#scene21', '#scene2','#scene11'];
+                    let currentImageIndex = 0;
+                    let bridge = document.querySelector("#bridge");
+                    this.el.addEventListener('click', () => {
+                        currentImageIndex = (currentImageIndex + 1) % images.length;
+                        sky1.setAttribute('src', images[currentImageIndex]);
+                        if(currentImageIndex === 2) {
+                            bridge.emit('showbridge')
+                         } else {
+                            bridge.emit('hidebridge')
+                         };
+                        sky1.emit('fadein');
+                    });
+                }
+            });
+
 
 AFRAME.registerComponent("flip", {
   init:function() {
@@ -38,10 +58,10 @@ AFRAME.registerComponent("flip", {
      this.el.addEventListener("click", () => {
           if(!rotate) {
               sky1.setAttribute("rotation", "0 90 0");
-              bridge.emit('bridgeflip')
+              bridge.emit('bridgeflip');
            } else {
               sky1.setAttribute("rotation", "0 -90 0");
-              bridge.emit('bridgeback')
+              bridge.emit('bridgeback');
            }
            rotate = !rotate;
         sky1.emit('fadein');
@@ -53,7 +73,9 @@ AFRAME.registerComponent("flip", {
 
 <a-assets>
   <img id="scene1" src="images/1.jpg">
+  <img id="scene11" src="images/1.1.jpg">
   <img id="scene2" src="images/2.jpg">
+  <img id="scene21" src="images/2.1.jpg">
   <img id="arrow" src="images/arrow.png">
 </a-assets>
 
@@ -76,20 +98,20 @@ AFRAME.registerComponent("flip", {
 <a-sky id="sky1" src="#scene1" rotation="0 -90 0" opacity="1"
   animation__fadein="startEvents: fadein; property: material.opacity; from: 0; to: 1; dir: alternate; dur: 300"></a-sky>
 
-  <a-cone id="cone1" class="clickable"
-  color="red" radius-bottom="0" radius-top="3" height="6" opacity="0.5"
-  position="50 1 0"
+  <a-cone id="coneback" class="clickable"
+  color="red" radius-bottom="0" radius-top="1.5" height="3" opacity="0.5"
+  position="20 1 0"
   animation__flash="property: opacity; to: 0; dur: 1000; dir: alternate; loop: true"
-  animation__click="startEvents: click; property: position; to: 50 5 0; dur: 150"
-  animation__clickback="startEvents: animationcomplete__click; property: position; to: 50 1 0; dur: 150"
-  switch></a-cone>
+  animation__click="startEvents: click; property: position; to: 20 5 0; dur: 150"
+  animation__clickback="startEvents: animationcomplete__click; property: position; to: 20 1 0; dur: 150"
+  switchback></a-cone>
 
-  <a-cone id="cone2" class="clickable"
-  color="red" radius-bottom="0" radius-top="3" height="6" opacity="0.5"
-  position="-50 1 0"
+  <a-cone id="cone" class="clickable"
+  color="red" radius-bottom="0" radius-top="1.5" height="3" opacity="0.5"
+  position="-20 1 0"
   animation__flash="property: opacity; to: 0; dur: 1000; dir: alternate; loop: true"
-  animation__click="startEvents: click; property: position; to: -50 5 0; dur: 150"
-  animation__clickback="startEvents: animationcomplete__click; property: position; to: -50 1 0; dur: 150"
+  animation__click="startEvents: click; property: position; to: -20 5 0; dur: 150"
+  animation__clickback="startEvents: animationcomplete__click; property: position; to: -20 1 0; dur: 150"
   switch></a-cone>
 
 <a-cone id="bridge" class="clickable"
