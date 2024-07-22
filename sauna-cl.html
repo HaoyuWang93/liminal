@@ -1,0 +1,60 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>LIMINAL - SAUNA</title>
+  <script src="aframe/aframe.min.js"></script>
+</head>
+
+<body>
+
+  <script>
+  AFRAME.registerComponent("weblink", {
+  schema: {
+    url: {
+      default: ""
+    }
+  },
+  init: function() {
+    this.el.addEventListener("click", (e) => {
+      window.location = this.data.url;
+    })
+  }
+});
+</script>
+
+  <style>
+  div.a-enter-ar {
+    visibility: hidden;
+  }
+
+  div.a-enter-vr {
+    visibility: hidden;
+  }
+  </style>
+
+
+<a-scene raycaster="objects: .clickable" cursor="rayOrigin: mouse; fuse: false;"
+    loading-screen="dotsColor: white; backgroundColor: black">
+
+<a-camera wasd-controls-enabled="false"></a-camera>
+
+<a-sky id="sky1" src="images/sauna/1.jpg" rotation="0 0 0"></a-sky>
+
+  <a-image src="images/arrow.png" id="arrow1" class="clickable"
+  width="2" height="2" rotation="-90 0 0" position="0.25 0 5" opacity="1" scale="1"
+  animation__flash="property: opacity; to: 0.25; dur: 1000; dir: alternate; loop: true"
+  animation__click="startEvents: click; property: scale; to: 0; dur: 150"
+  link="href: sauna-mr.html"></a-image>
+
+  <a-image src="images/arrow.png" id="arrow2" class="clickable"
+  width="2" height="2" rotation="90 0 -90" position="-5 0 -0.25" opacity="1" scale="1"
+  animation__flash="property: opacity; to: 0.25; dur: 1000; dir: alternate; loop: true"
+  animation__click="startEvents: click; property: scale; to: 0; dur: 150"
+  link="href: sauna-ml.html"></a-image>
+
+</a-scene>
+
+</body>
+</html>

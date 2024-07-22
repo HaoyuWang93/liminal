@@ -1,0 +1,54 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>LIMINAL - SAUNA</title>
+  <script src="aframe/aframe.min.js"></script>
+</head>
+
+<body>
+
+  <script>
+  AFRAME.registerComponent("weblink", {
+  schema: {
+    url: {
+      default: ""
+    }
+  },
+  init: function() {
+    this.el.addEventListener("click", (e) => {
+      window.location = this.data.url;
+    })
+  }
+});
+</script>
+
+  <style>
+  div.a-enter-ar {
+    visibility: hidden;
+  }
+
+  div.a-enter-vr {
+    visibility: hidden;
+  }
+  </style>
+
+
+<a-scene raycaster="objects: .clickable" cursor="rayOrigin: mouse; fuse: false;"
+    loading-screen="dotsColor: white; backgroundColor: black">
+
+<a-camera wasd-controls-enabled="false"></a-camera>
+
+<a-sky id="sky1" src="images/sauna/out.jpg" rotation="0 -90 0"></a-sky>
+
+  <a-image src="images/sauna/sauna.png" id="out" class="clickable"
+  width="1" height="1" rotation="180 0 180" position="0 1.7 2" opacity="1" scale="1"
+  animation__flash="property: opacity; to: 0.25; dur: 1000; dir: alternate; loop: true"
+  animation__click="startEvents: click; property: scale; to: 0; dur: 150"
+  link="href: sauna-m.html"></a-image>
+
+</a-scene>
+
+</body>
+</html>
