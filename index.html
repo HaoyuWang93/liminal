@@ -1,152 +1,118 @@
 
 <!doctype html>
-<html lang="en">
+<html>
 <head>
   <meta charset="UTF-8">
-  <title>LIMINAL - SCHOOL</title>
+  <title>MAZE</title>
   <script src="aframe/aframe.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="assets/css/custom.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<div style='position: fixed;
+  top: 15px;
+  left: 20px;
+  width:100%;
+  text-align: left;
+  z-index: 1;'>
+  <a href="https://haoyuwang93.github.io/portfolio/"><button class="button">PORTFOLIO</button></a>
+</div>
+
 </head>
 
 <body>
 
   <script>
-
-  AFRAME.registerComponent('switch', {
-                init: function () {
-                      const sky1 = document.querySelector('#sky1');
-                      const images = ['#scene1', '#scene11', '#scene2','#scene21'];
-                      let currentImageIndex = 0;
-                      let bridge = document.querySelector("#bridge");
-                      this.el.addEventListener('click', () => {
-                          currentImageIndex = (currentImageIndex + 1) % images.length;
-                          sky1.setAttribute('src', images[currentImageIndex]);
-                          if(currentImageIndex === 2) {
-                              bridge.emit('showbridge')
-                           } else {
-                              bridge.emit('hidebridge')
-                           };
-                          sky1.emit('fadein');
-                      });
-                  }
-              });
-
-AFRAME.registerComponent('switchback', {
-              init: function () {
-                    const sky1 = document.querySelector('#sky1');
-                    const images = ['#scene1', '#scene21', '#scene2','#scene11'];
-                    let currentImageIndex = 0;
-                    let bridge = document.querySelector("#bridge");
-                    this.el.addEventListener('click', () => {
-                        currentImageIndex = (currentImageIndex + 1) % images.length;
-                        sky1.setAttribute('src', images[currentImageIndex]);
-                        if(currentImageIndex === 2) {
-                            bridge.emit('showbridge')
-                         } else {
-                            bridge.emit('hidebridge')
-                         };
-                        sky1.emit('fadein');
-                    });
-                }
-            });
-
-
-AFRAME.registerComponent("flip", {
-  init:function() {
-     let rotate = false;
-     let sky1 = document.querySelector("#sky1");
-     let bridge = document.querySelector("#bridge");
-     let cone = document.querySelector("#cone");
-     let coneback = document.querySelector("#coneback");
-     this.el.addEventListener("click", () => {
-          if(!rotate) {
-              sky1.setAttribute("rotation", "0 90 0");
-              bridge.emit('bridgeflip');
-              cone.emit('bridgeflip');
-              coneback.emit('bridgeflip');
-           } else {
-              sky1.setAttribute("rotation", "0 -90 0");
-              bridge.emit('bridgeback');
-              cone.emit('bridgeback');
-              coneback.emit('bridgeback');
-           }
-           rotate = !rotate;
-        sky1.emit('fadein');
-     });
+  AFRAME.registerComponent("weblink", {
+  schema: {
+    url: {
+      default: ""
+    }
+  },
+  init: function() {
+    this.el.addEventListener("click", (e) => {
+      window.location = this.data.url;
+    })
   }
-})
-
-  </script>
-
-<a-assets>
-  <img id="scene1" src="images/1.jpg">
-  <img id="scene11" src="images/1.1.jpg">
-  <img id="scene2" src="images/2.jpg">
-  <img id="scene21" src="images/2.1.jpg">
-  <img id="arrow" src="images/arrow.png">
-</a-assets>
-
-  <style>
-  div.a-enter-ar {
-    visibility: hidden;
-  }
-
-  div.a-enter-vr {
-    visibility: hidden;
-  }
-  </style>
-
+});
+</script>
 
 <a-scene raycaster="objects: .clickable" cursor="rayOrigin: mouse; fuse: false;"
-    loading-screen="dotsColor: white; backgroundColor: black">
-
+loading-screen="dotsColor: black; backgroundColor: #F1F1F1">
 <a-camera wasd-controls-enabled="false"></a-camera>
 
-<a-sky id="sky1" src="#scene1" rotation="0 -90 0" opacity="1"
-  animation__fadein="startEvents: fadein; property: material.opacity; from: 0; to: 1; dir: alternate; dur: 300"></a-sky>
+  <a-assets>
+    <img id="sky" src="images/gallery.jpg" alt="background">
+    <img id="school" src="images/cover/school.jpg" alt="">
+    <img id="sauna" src="images/cover/sauna.jpg" alt="">
+  </a-assets>
 
-  <a-image src="#arrow" id="coneback" class="clickable"
-  width="2" height="2" rotation="90 0 90" position="5 0 0" opacity="1" scale="1"
-  animation__flash="property: opacity; to: 0.25; dur: 1000; dir: alternate; loop: true"
-  animation__click="startEvents: click; property: scale; to: 0; dur: 150"
-  animation__clickback="startEvents: animationcomplete__click; property: scale; to: 1; dur: 150"
-  animation__flip="startEvents: bridgeflip; property: position; to: -5 0 0; dur: 10"
-  animation__flipback="startEvents: bridgeback; property: position; to: 5 0 0; dur: 10"
-  animation__fliprotate="startEvents: bridgeflip; property: rotation; to: 90 0 -90; dur: 10"
-  animation__fliprotateback="startEvents: bridgeback; property: rotation; to: 90 0 90; dur: 10"
-  switchback></a-image>
+  <a-sky src="#sky" rotation="0 -90 0"></a-sky>
 
-  <a-image src="#arrow" id="cone" class="clickable"
-  width="2" height="2" rotation="90 0 -90" position="-5 0 0" opacity="1" scale="1"
-  animation__flash="property: opacity; to: 0.25; dur: 1000; dir: alternate; loop: true"
-  animation__click="startEvents: click; property: scale; to: 0; dur: 150"
-  animation__clickback="startEvents: animationcomplete__click; property: scale; to: 1; dur: 150"
-  animation__flip="startEvents: bridgeflip; property: position; to: 5 0 0; dur: 10"
-  animation__flipback="startEvents: bridgeback; property: position; to: -5 0 0; dur: 10"
-  animation__fliprotate="startEvents: bridgeflip; property: rotation; to: 90 0 90; dur: 10"
-  animation__fliprotateback="startEvents: bridgeback; property: rotation; to: 90 0 -90; dur: 10"
-  switch></a-image>
+  <a-text line-height="80" width="2.5" rotation="0 0 0"
+  color="black" align="center" position="0 1.9 -2.51"
+  value="Are you running into a maze?
+  ...
+  maybe we are living it all along">
+  </a-text>
 
-<a-image src="#arrow" id="bridge" class="clickable"
-  width="2" height="2" opacity="1" position="0 0 -5" rotation="90 0 0" scale="0"
-  animation__on="startEvents: showbridge; property: scale; to: 1; dur: 10"
-  animation__off="startEvents: hidebridge; property: scale; to: 0; dur: 10"
-  animation__flash="property: opacity; to: 0.25; dur: 600; dir: alternate; loop: true"
-  animation__click="startEvents: click; property: opacity; to: 0; dur: 150"
-  animation__clickback="startEvents: animationcomplete__click; property: opacity; to: 1; dur: 150"
-  animation__flip="startEvents: bridgeflip; property: position; to: 0 0 5; dur: 10"
-  animation__flipback="startEvents: bridgeback; property: position; to: 0 0 -5; dur: 10"
-  animation__fliprotate="startEvents: bridgeflip; property: rotation; to: -90 0 0; dur: 10"
-  animation__fliprotateback="startEvents: bridgeback; property: rotation; to: 90 0 0; dur: 10"
-  flip></a-image>
+  <a-text line-height="60" width="1.7" rotation="0 0 0"
+  color="black" align="center" position="0 1.4 -2.5"
+  value="An open-ended project,
+  stay tuned for updates...">
+  </a-text>
 
-  <a-text line-height="100"
-  width="3" rotation="-90 0 0" position="0 0 0" color="white" align="center"
-  value="Are we running into liminality
-  or are we always in it?
-  Work in progress...">
-</a-text>
+  <a-image class="clickable"
+   src= "#school" scale="1" width="1" height="1" rotation="0 -90 0" position="2.5 1.7 -1.8"
+   link="href: school.html" target="_blank" rel="noopener noreferrer">
+  </a-image>
+
+  <a-image class="clickable"
+   src= "#sauna" scale="1" width="1" height="1" rotation="0 -90 0" position="2.5 1.7 -0.6"
+   link="href: sauna.html" target="_blank" rel="noopener noreferrer">
+  </a-image>
+
+  <a-image class="clickable"
+   color="white" scale="1" width="1" height="1" rotation="0 -90 0" position="2.5 1.7 0.6"
+   animation__oepn="startEvents: click; property: scale; to: 0; dur: 300;">
+  </a-image>
+
+  <a-image class="clickable"
+   color="white" scale="1" width="1" height="1" rotation="0 -90 0" position="2.5 1.7 1.8"
+   animation__oepn="startEvents: click; property: scale; to: 0; dur: 300;">
+  </a-image>
+
+  <a-image class="clickable"
+   color="white" scale="1" width="1" height="1" rotation="0 90 0" position="-2.5 1.7 -1.8"
+   animation__oepn="startEvents: click; property: scale; to: 0; dur: 300;">
+  </a-image>
+
+  <a-image class="clickable"
+   color="white" scale="1" width="1" height="1" rotation="0 90 0" position="-2.5 1.7 -0.6"
+   animation__oepn="startEvents: click; property: scale; to: 0; dur: 300;">
+  </a-image>
+
+  <a-image class="clickable"
+   color="white" scale="1" width="1" height="1" rotation="0 90 0" position="-2.5 1.7 0.6"
+   animation__oepn="startEvents: click; property: scale; to: 0; dur: 300;">
+  </a-image>
+
+  <a-image class="clickable"
+   color="white" scale="1" width="1" height="1" rotation="0 90 0" position="-2.5 1.7 1.8"
+   animation__oepn="startEvents: click; property: scale; to: 0; dur: 300;">
+  </a-image>
+
+  <a-image class="clickable"
+   color="white" scale="1" width="1.5" height="1" rotation="0 180 0" position="1.2 1.7 2.5"
+   animation__oepn="startEvents: click; property: scale; to: 0; dur: 300;">
+  </a-image>
+
+  <a-image class="clickable"
+   color="white" scale="1" width="1.5" height="1" rotation="0 180 0" position="-0.8 1.7 2.5"
+   animation__oepn="startEvents: click; property: scale; to: 0; dur: 300;">
+  </a-image>
 
 </a-scene>
 
 </body>
-</html>
+</html

@@ -3,10 +3,22 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>LIMINAL - SAUNA</title>
+  <title>MAZE-SAUNA</title>
   <script src="aframe/aframe.min.js"></script>
-</head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="assets/css/custom.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
+<div style='position: fixed;
+  top: 15px;
+  left: 20px;
+  width:100%;
+  text-align: left;
+  z-index: 1;'>
+  <a href="index.html"><button class="button">GALLERY</button></a>
+</div>
+
+</head>
 <body>
 
   <script>
@@ -43,13 +55,13 @@
 <a-sky id="sky1" src="images/sauna/2.jpg" rotation="0 -90 0"></a-sky>
 
   <a-image src="images/arrow.png" id="arrow1" class="clickable"
-  width="2" height="2" rotation="90 0 0" position="0 0 -5" opacity="1" scale="1"
+  width="2" height="2" rotation="90 0 0" position="0.25 0 -5" opacity="1" scale="1"
   animation__flash="property: opacity; to: 0.25; dur: 1000; dir: alternate; loop: true"
   animation__click="startEvents: click; property: scale; to: 0; dur: 150"
   link="href: sauna-cl.html"></a-image>
 
   <a-image src="images/arrow.png" id="arrow2" class="clickable"
-  width="2" height="2" rotation="-90 0 0" position="0 0 5" opacity="1" scale="1"
+  width="2" height="2" rotation="-90 0 0" position="0.25 0 5" opacity="1" scale="1"
   animation__flash="property: opacity; to: 0.25; dur: 1000; dir: alternate; loop: true"
   animation__click="startEvents: click; property: scale; to: 0; dur: 150"
   link="href: sauna-cr.html"></a-image>
