@@ -35,10 +35,27 @@
     })
   }
 });
+
+<a-entity class="clickable"
+    event-set__mouseenter="scale: 1.2 1.2 1"
+    event-set__mouseleave="scale: 1 1 1">
+</a-entity>
+
 </script>
 
+<style>
+div.a-enter-ar {
+  visibility: hidden;
+}
+
+div.a-enter-vr {
+  visibility: hidden;
+}
+</style>
+
 <a-scene raycaster="objects: .clickable" cursor="rayOrigin: mouse; fuse: false;"
-loading-screen="dotsColor: black; backgroundColor: #F1F1F1">
+    loading-screen="dotsColor: white; backgroundColor: black">
+
 <a-camera wasd-controls-enabled="false"></a-camera>
 
   <a-assets>
