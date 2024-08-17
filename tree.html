@@ -27,7 +27,7 @@
   AFRAME.registerComponent('switch1', {
                 init: function () {
                       const sky1 = document.querySelector('#sky1');
-                      const images = ['#scene1', '#scene2', '#scene3'];
+                      const images = ['#scene1', '#scene2', '#scene3', '#scene4'];
                       let currentImageIndex = 0;
                       this.el.addEventListener('click', () => {
                           currentImageIndex = (currentImageIndex + 1) % images.length;
@@ -40,7 +40,7 @@
 AFRAME.registerComponent('switch2', {
               init: function () {
                     const sky1 = document.querySelector('#sky1');
-                    const images = ['#scene3', '#scene2', '#scene1'];
+                    const images = ['#scene4', '#scene3', '#scene2', '#scene1'];
                     let currentImageIndex = 0;
                     this.el.addEventListener('click', () => {
                         currentImageIndex = (currentImageIndex + 1) % images.length;
@@ -53,7 +53,7 @@ AFRAME.registerComponent('switch2', {
   AFRAME.registerComponent('switch3', {
                 init: function () {
                       const sky1 = document.querySelector('#sky1');
-                      const images = ['#scene1', '#scene2', '#scene3'];
+                      const images = ['#scene1', '#scene4', '#scene2', '#scene3'];
                       let currentImageIndex = 0;
                       this.el.addEventListener('click', () => {
                           currentImageIndex = (currentImageIndex + 1) % images.length;
@@ -66,7 +66,7 @@ AFRAME.registerComponent('switch2', {
 AFRAME.registerComponent('switch4', {
               init: function () {
                     const sky1 = document.querySelector('#sky1');
-                    const images = ['#scene3', '#scene2', '#scene1'];
+                    const images = ['#scene3', '#scene2', '#scene4', '#scene1'];
                     let currentImageIndex = 0;
                     this.el.addEventListener('click', () => {
                         currentImageIndex = (currentImageIndex + 1) % images.length;
@@ -82,6 +82,7 @@ AFRAME.registerComponent('switch4', {
   <img id="scene1" src="images/tree/1.jpg">
   <img id="scene2" src="images/tree/2.jpg">
   <img id="scene3" src="images/tree/3.jpg">
+  <img id="scene3" src="images/tree/4.jpg">
   <img id="circle" src="images/circle.png">
 </a-assets>
 
