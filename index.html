@@ -62,6 +62,7 @@ div.a-enter-vr {
     <img id="sky" src="images/gallery.jpg" alt="background">
     <img id="school" src="images/cover/school.jpg" alt="">
     <img id="sauna" src="images/cover/sauna.jpg" alt="">
+    <img id="tree" src="images/cover/tree.jpg" alt="">
   </a-assets>
 
   <a-sky src="#sky" rotation="0 -90 0"></a-sky>
@@ -85,15 +86,30 @@ div.a-enter-vr {
    link="href: school.html" target="_blank" rel="noopener noreferrer">
   </a-image>
 
+  <a-text line-height="50" width="2.5" rotation="0 -90 0"
+  color="white" align="center"  position="2.5 1.12 -1.8"
+  value="CORRIDOR">
+  </a-text>
+
   <a-image class="clickable"
    src= "#sauna" scale="1" width="1" height="1" rotation="0 -90 0" position="2.5 1.7 -0.6"
    link="href: sauna.html" target="_blank" rel="noopener noreferrer">
   </a-image>
 
+  <a-text line-height="50" width="2.5" rotation="0 -90 0"
+  color="white" align="center"  position="2.5 1.12 -0.6"
+  value="SAUNA">
+  </a-text>
+
   <a-image class="clickable"
-   color="white" scale="1" width="1" height="1" rotation="0 -90 0" position="2.5 1.7 0.6"
-   animation__oepn="startEvents: click; property: scale; to: 0; dur: 300;">
+   src= "#tree" scale="1" width="1" height="1" rotation="0 -90 0" position="2.5 1.7 0.6"
+   link="href: tree.html" target="_blank" rel="noopener noreferrer">
   </a-image>
+
+  <a-text line-height="50" width="2.5" rotation="0 -90 0"
+  color="white" align="center"  position="2.5 1.12 0.6"
+  value="CAT TREE">
+  </a-text>
 
   <a-image class="clickable"
    color="white" scale="1" width="1" height="1" rotation="0 -90 0" position="2.5 1.7 1.8"

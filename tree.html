@@ -1,0 +1,138 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>MAZE-CAT TREE</title>
+  <script src="aframe/aframe.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="assets/css/custom.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<div style='position: fixed;
+  top: 15px;
+  left: 20px;
+  width:100%;
+  text-align: left;
+  z-index: 1;'>
+  <a href="index.html"><button class="button">GALLERY</button></a>
+</div>
+
+</head>
+
+<body>
+
+  <script>
+
+  AFRAME.registerComponent('switch1', {
+                init: function () {
+                      const sky1 = document.querySelector('#sky1');
+                      const images = ['#scene1', '#scene2', '#scene3'];
+                      let currentImageIndex = 0;
+                      this.el.addEventListener('click', () => {
+                          currentImageIndex = (currentImageIndex + 1) % images.length;
+                          sky1.setAttribute('src', images[currentImageIndex]);
+                          sky1.emit('fadein');
+                      });
+                  }
+              });
+
+AFRAME.registerComponent('switch2', {
+              init: function () {
+                    const sky1 = document.querySelector('#sky1');
+                    const images = ['#scene3', '#scene2', '#scene1'];
+                    let currentImageIndex = 0;
+                    this.el.addEventListener('click', () => {
+                        currentImageIndex = (currentImageIndex + 1) % images.length;
+                        sky1.setAttribute('src', images[currentImageIndex]);
+                        sky1.emit('fadein');
+                    });
+                }
+            })
+
+  AFRAME.registerComponent('switch3', {
+                init: function () {
+                      const sky1 = document.querySelector('#sky1');
+                      const images = ['#scene1', '#scene2', '#scene3'];
+                      let currentImageIndex = 0;
+                      this.el.addEventListener('click', () => {
+                          currentImageIndex = (currentImageIndex + 1) % images.length;
+                          sky1.setAttribute('src', images[currentImageIndex]);
+                          sky1.emit('fadein');
+                      });
+                  }
+              });
+
+AFRAME.registerComponent('switch4', {
+              init: function () {
+                    const sky1 = document.querySelector('#sky1');
+                    const images = ['#scene3', '#scene2', '#scene1'];
+                    let currentImageIndex = 0;
+                    this.el.addEventListener('click', () => {
+                        currentImageIndex = (currentImageIndex + 1) % images.length;
+                        sky1.setAttribute('src', images[currentImageIndex]);
+                        sky1.emit('fadein');
+                    });
+                }
+            })
+
+  </script>
+
+<a-assets>
+  <img id="scene1" src="images/tree/1.jpg">
+  <img id="scene2" src="images/tree/2.jpg">
+  <img id="scene3" src="images/tree/3.jpg">
+  <img id="circle" src="images/circle.png">
+</a-assets>
+
+  <style>
+  div.a-enter-ar {
+    visibility: hidden;
+  }
+
+  div.a-enter-vr {
+    visibility: hidden;
+  }
+  </style>
+
+
+<a-scene raycaster="objects: .clickable" cursor="rayOrigin: mouse; fuse: false;"
+    loading-screen="dotsColor: white; backgroundColor: black">
+
+<a-camera wasd-controls-enabled="false"></a-camera>
+
+<a-sky id="sky1" src="#scene1" rotation="0 -90 0" opacity="1"
+  animation__fadein="startEvents: fadein; property: material.opacity; from: 0; to: 1; dir: alternate; dur: 300"></a-sky>
+
+  <a-image src="#circle" id="circle1" class="clickable"
+  width="1.2" height="1.2" rotation="90 0 0" position="2 0 0" opacity="1" scale="1 1 1"
+  animation__flash="property: scale; to: 0 0 0; dur: 1000; dir: alternate; loop: true"
+  animation__click="startEvents: click; property: position; to: 0 0 0; dur: 500"
+  animation__clickback="startEvents: animationcomplete__click; property: position; to: 2 0 0; dur: 500; delay: 2000"
+  switch1></a-image>
+
+  <a-image src="#circle" id="circle2" class="clickable"
+  width="1.2" height="1.2" rotation="90 0 0" position="-2 0 0" opacity="1" scale="1 1 1"
+  animation__flash="property: scale; to: 0 0 0; dur: 1000; dir: alternate; loop: true; delay: 250"
+  animation__click="startEvents: click; property: position; to: 0 0 0; dur: 500"
+  animation__clickback="startEvents: animationcomplete__click; property: position; to: -2 0 0; dur: 500; delay: 2000"
+  switch2></a-image>
+
+  <a-image src="#circle" id="circle3" class="clickable"
+  width="1.2" height="1.2" rotation="90 0 0" position="0 0 2" opacity="1" scale="1 1 1"
+  animation__flash="property: scale; to: 0 0 0; dur: 1000; dir: alternate; loop: true; delay: 500"
+  animation__click="startEvents: click; property: position; to: 0 0 0; dur: 500"
+  animation__clickback="startEvents: animationcomplete__click; property: position; to: 0 0 2; dur: 500; delay: 2000"
+  switch3></a-image>
+
+  <a-image src="#circle" id="circle4" class="clickable"
+  width="1.2" height="1.2" rotation="90 0 0" position="0 0 -2" opacity="1" scale="1 1 1"
+  animation__flash="property: scale; to: 0 0 0; dur: 1000; dir: alternate; loop: true; delay: 750"
+  animation__click="startEvents: click; property: position; to: 0 0 0; dur: 500"
+  animation__clickback="startEvents: animationcomplete__click; property: position; to: 0 0 -2; dur: 500; delay: 2000"
+  switch4></a-image>
+
+</a-scene>
+
+</body>
+</html>
